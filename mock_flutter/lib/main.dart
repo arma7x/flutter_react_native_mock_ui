@@ -101,64 +101,92 @@ class _MyHomePageState extends State<MyHomePage> {
                 borderRadius: BorderRadius.circular(10.0),
                 color: Colors.green,
               ),
-              width: width * 0.8,
+              width: width * 0.85,
               height: 80,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        CupertinoPageRoute(builder: (context) => const Screens.TrackPage(title: 'Track')),
-                      );
-                    },
-                    child: Text('Track'),
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12), // <-- Radius
+                  SizedBox(
+                    height: 40,
+                    width: ((width * 0.85)) * 0.23,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          CupertinoPageRoute(builder: (context) => const Screens.TrackPage(title: 'Track')),
+                        );
+                      },
+                      child: Text(
+                        'Track',
+                         style: TextStyle(fontSize: 12),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12), // <-- Radius
+                        ),
                       ),
                     ),
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        CupertinoPageRoute(builder: (context) => const Screens.BookPage(title: 'Book')),
-                      );
-                    },
-                    child: Text('Book'),
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12), // <-- Radius
+                  SizedBox(
+                    height: 40,
+                    width: ((width * 0.85)) * 0.23,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          CupertinoPageRoute(builder: (context) => const Screens.BookPage(title: 'Book')),
+                        );
+                      },
+                      child: Text(
+                        'Book',
+                        style: TextStyle(fontSize: 12),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12), // <-- Radius
+                        ),
                       ),
                     ),
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        CupertinoPageRoute(builder: (context) => const Screens.RatePage(title: 'Rate')),
-                      );
-                    },
-                    child: Text('Rate'),
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12), // <-- Radius
+                  SizedBox(
+                    height: 40,
+                    width: ((width * 0.85)) * 0.23,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          CupertinoPageRoute(builder: (context) => const Screens.RatePage(title: 'Rate')),
+                        );
+                      },
+                      child: Text(
+                        'Rate',
+                        style: TextStyle(fontSize: 12),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12), // <-- Radius
+                        ),
                       ),
                     ),
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        CupertinoPageRoute(builder: (context) => const Screens.BranchPage(title: 'Branch')),
-                      );
-                    },
-                    child: Text('Branch'),
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12), // <-- Radius
+                  SizedBox(
+                    height: 40,
+                    width: ((width * 0.85)) * 0.23,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          CupertinoPageRoute(builder: (context) => const Screens.BranchPage(title: 'Branch')),
+                        );
+                      },
+                      child: Text(
+                        'Branch',
+                        style: TextStyle(fontSize: 12),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12), // <-- Radius
+                        ),
                       ),
                     ),
                   ),

@@ -9,7 +9,7 @@ class RatePage extends StatefulWidget {
   State<RatePage> createState() => _RatePageState();
 }
 
-class _RatePageState extends State<RatePage> {
+class _RatePageState extends State<RatePage> with AutomaticKeepAliveClientMixin<RatePage>{
   int _counter = 0;
 
   void _incrementCounter() {
@@ -19,31 +19,43 @@ class _RatePageState extends State<RatePage> {
   }
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+    return DefaultTabController(
+      length: 2,
+      child: new Scaffold(
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          title: Text(widget.title),
+        ),
+        body: TabBarView(
+          children: [
+            Center(
+              child: Text("DOMESTIC"),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+            Center(
+              child: Text("HISTORY"),
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+        bottomNavigationBar: new TabBar(
+          tabs: [
+            Tab(
+              text: 'DOMESTIC',
+            ),
+            Tab(
+              text: 'INTERNATIONAL',
+            ),
+          ],
+          labelColor: Colors.red,
+          unselectedLabelColor: Colors.blue,
+          indicatorSize: TabBarIndicatorSize.label,
+          indicatorPadding: EdgeInsets.all(5.0),
+          indicatorColor: Colors.red,
+        ),
+      )
     );
   }
 }
