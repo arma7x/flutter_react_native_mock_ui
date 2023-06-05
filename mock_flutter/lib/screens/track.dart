@@ -29,6 +29,21 @@ class _TrackPageState extends State<TrackPage> with AutomaticKeepAliveClientMixi
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           title: Text(widget.title),
+          bottom: TabBar(
+            tabs: [
+              Tab(
+                text: 'TRACK',
+              ),
+              Tab(
+                text: 'HISTORY',
+              ),
+            ],
+            labelColor: Colors.red,
+            unselectedLabelColor: Colors.blue,
+            indicatorSize: TabBarIndicatorSize.label,
+            indicatorPadding: EdgeInsets.all(5.0),
+            indicatorColor: Colors.red,
+          )
         ),
         body: TabBarView(
           children: [
@@ -74,21 +89,6 @@ class _TrackPageState extends State<TrackPage> with AutomaticKeepAliveClientMixi
               child: Text("HISTORY"),
             ),
           ],
-        ),
-        bottomNavigationBar: new TabBar(
-          tabs: [
-            Tab(
-              text: 'TRACK',
-            ),
-            Tab(
-              text: 'HISTORY',
-            ),
-          ],
-          labelColor: Colors.red,
-          unselectedLabelColor: Colors.blue,
-          indicatorSize: TabBarIndicatorSize.label,
-          indicatorPadding: EdgeInsets.all(5.0),
-          indicatorColor: Colors.red,
         ),
       )
     );

@@ -29,6 +29,21 @@ class _RatePageState extends State<RatePage> with AutomaticKeepAliveClientMixin<
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           title: Text(widget.title),
+          bottom: TabBar(
+            tabs: [
+              Tab(
+                text: 'DOMESTIC',
+              ),
+              Tab(
+                text: 'INTERNATIONAL',
+              ),
+            ],
+            labelColor: Colors.red,
+            unselectedLabelColor: Colors.blue,
+            indicatorSize: TabBarIndicatorSize.label,
+            indicatorPadding: EdgeInsets.all(5.0),
+            indicatorColor: Colors.red,
+          ),
         ),
         body: TabBarView(
           children: [
@@ -39,21 +54,6 @@ class _RatePageState extends State<RatePage> with AutomaticKeepAliveClientMixin<
               child: Text("HISTORY"),
             ),
           ],
-        ),
-        bottomNavigationBar: new TabBar(
-          tabs: [
-            Tab(
-              text: 'DOMESTIC',
-            ),
-            Tab(
-              text: 'INTERNATIONAL',
-            ),
-          ],
-          labelColor: Colors.red,
-          unselectedLabelColor: Colors.blue,
-          indicatorSize: TabBarIndicatorSize.label,
-          indicatorPadding: EdgeInsets.all(5.0),
-          indicatorColor: Colors.red,
         ),
       )
     );
