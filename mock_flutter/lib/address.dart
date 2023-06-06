@@ -66,7 +66,6 @@ class Address {
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(title),
       ),
       body: Form(
@@ -185,6 +184,12 @@ class Address {
                   }
                 },
                 child: const Text('Submit'),
+                style: ElevatedButton.styleFrom(
+                  onPrimary: Colors.black,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12), // <-- Radius
+                  ),
+                ),
               ),
             ),
           ],

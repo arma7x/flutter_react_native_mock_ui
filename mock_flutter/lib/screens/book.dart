@@ -32,7 +32,6 @@ class _BookPageState extends State<BookPage> with AutomaticKeepAliveClientMixin<
       length: 2,
       child: new Scaffold(
         appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           title: Text(widget.title),
           bottom: TabBar(
             tabs: [
@@ -43,11 +42,11 @@ class _BookPageState extends State<BookPage> with AutomaticKeepAliveClientMixin<
                 text: 'HISTORY',
               ),
             ],
-            labelColor: Colors.red,
-            unselectedLabelColor: Colors.blue,
+            labelColor: Colors.black,
+            unselectedLabelColor: Colors.grey,
             indicatorSize: TabBarIndicatorSize.label,
             indicatorPadding: EdgeInsets.all(5.0),
-            indicatorColor: Colors.red,
+            indicatorColor: Theme.of(context).primaryColor,
           ),
         ),
         body: TabBarView(
