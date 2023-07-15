@@ -70,10 +70,10 @@ export default function App() {
         }}
         onStartShouldSetResponder={(event) => {
           Keyboard.dismiss();
-          return true;
+          return keyboardHeight > 0;
         }}
         onMoveShouldSetResponder={(event) => {
-          return true;
+          return false;
         }}
       >
         <NavigationContainer>
