@@ -1,7 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Platform, SafeAreaView, View, Keyboard } from 'react-native';
-import { useState, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import {
   HomeScreen,
@@ -14,65 +14,69 @@ import {
 
 const Stack = createNativeStackNavigator();
 
-let initialHeight = 0;
-
 export default function App() {
-  const [bottom, setBottom] = useState(0);
-  const [keyboardHeight, setKeyboardHeight] = useState(0);
+
+  const initialHeight = useRef(0);
+  const keyboardHeight = useRef(0);
+  const clearTimer = useRef(-1);
+  const [paddingBottom, setPaddingBottom] = useState(0);
 
   useEffect(() => {
     if (Platform.OS === 'ios') {
-      return Keyboard.addListener('keyboardWillChangeFrame', _updateBottomIfNecessary);
+      return Keyboard.addListener('keyboardWillChangeFrame', updateBottomIfNecessary);
     }
   }, []);
 
   useEffect(() => {
     if (Platform.OS !== 'ios') {
-        Keyboard.addListener('keyboardDidHide', _updateBottomIfNecessary);
+        Keyboard.addListener('keyboardDidHide', updateBottomIfNecessary);
     }
   }, []);
 
   useEffect(() => {
     if (Platform.OS !== 'ios') {
-        Keyboard.addListener('keyboardDidShow', _updateBottomIfNecessary);
+        Keyboard.addListener('keyboardDidShow', updateBottomIfNecessary);
     }
   }, []);
 
-  async function _updateBottomIfNecessary(event) {
+  function updateBottomIfNecessary(event) {
     if (event.endCoordinates.height > 0) {
-      setKeyboardHeight(event.endCoordinates.height);
+      keyboardHeight.current = event.endCoordinates.height;
     } else {
-      setKeyboardHeight(0);
+      keyboardHeight.current = 0;
     }
   }
 
+  function onLayout(event) {
+    if (clearTimer.current > -1) {
+      clearTimeout(clearTimer);
+      clearTimer.current = -1;
+    }
+    if (initialHeight.current === 0) {
+      initialHeight.current = event.nativeEvent.layout.height;
+      console.log("initialHeight is:", initialHeight.current);
+    }
+    clearTimer.current = setTimeout(() => {
+      console.log("Keyboard height is:", keyboardHeight.current, initialHeight.current);
+      if (Platform.OS === 'ios') {
+        if (keyboardHeight.current > 0) {
+          setPaddingBottom(initialHeight.current - keyboardHeight.current);
+        } else {
+          setPaddingBottom(0);
+        }
+      }
+      clearTimer.current = -1;
+    }, 100);
+  }
+
   return (
-      <SafeAreaView
-        style={{
-          flex: 1,
-          paddingBottom: bottom
-        }}
-        onLayout={(event) => {
-          if (initialHeight === 0) {
-            initialHeight = event.nativeEvent.layout.height;
-            console.log("initialHeight is:", initialHeight);
-          }
-          setTimeout(() => {
-            console.log("Keyboard height is:", keyboardHeight, initialHeight);
-            if (Platform.OS === 'ios') {
-              if (keyboardHeight > 0) {
-                setBottom(initialHeight - keyboardHeight);
-              } else {
-                setBottom(0);
-              }
-            }
-          }, 100);
-        }}
-        onStartShouldSetResponder={(event) => {
+      <SafeAreaView style={{ flex: 1, paddingBottom: paddingBottom }}
+        onLayout={onLayout}
+        onStartShouldSetResponder={(evt) => {
           Keyboard.dismiss();
-          return keyboardHeight > 0;
+          return keyboardHeight.current > 0;
         }}
-        onMoveShouldSetResponder={(event) => {
+        onMoveShouldSetResponder={(evt) => {
           return false;
         }}
       >
