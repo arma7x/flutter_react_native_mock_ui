@@ -23,19 +23,22 @@ export default function App() {
 
   useEffect(() => {
     if (Platform.OS === 'ios') {
-      return Keyboard.addListener('keyboardWillChangeFrame', updateBottomIfNecessary);
+      const subscribe = Keyboard.addListener('keyboardWillChangeFrame', updateBottomIfNecessary);
+      return subscribe.remove;
     }
   }, []);
 
   useEffect(() => {
     if (Platform.OS !== 'ios') {
-        Keyboard.addListener('keyboardDidHide', updateBottomIfNecessary);
+      const subscribe = Keyboard.addListener('keyboardDidHide', updateBottomIfNecessary);
+      return subscribe.remove;
     }
   }, []);
 
   useEffect(() => {
     if (Platform.OS !== 'ios') {
-        Keyboard.addListener('keyboardDidShow', updateBottomIfNecessary);
+      const subscribe = Keyboard.addListener('keyboardDidShow', updateBottomIfNecessary);
+      return subscribe.remove;
     }
   }, []);
 
@@ -49,7 +52,7 @@ export default function App() {
 
   function onLayout(event) {
     if (clearTimer.current > -1) {
-      clearTimeout(clearTimer);
+      clearTimeout(clearTimer.current);
       clearTimer.current = -1;
     }
     if (initialHeight.current === 0) {
